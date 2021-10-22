@@ -6,7 +6,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "commit:changes": "git-cz",
+    "prepare": "husky install",
+    "type:check": "bash -c tsc --pretty --noEmit",
+    "prettier:check": "prettier --check .",
+    "lint:check": "eslint . --ext ts --ext tsx --ext js --fix",
+    "prettier:fix": "prettier --write .",
+    "style:all": "yarn prettier:check && yarn lint:check"
   },
   "dependencies": {
     "next": "11.1.2",
@@ -15,8 +22,33 @@
   },
   "devDependencies": {
     "@types/react": "17.0.31",
-    "eslint": "8.0.1",
+    "@typescript-eslint/eslint-plugin": "^5.1.0",
+    "@typescript-eslint/parser": "^5.1.0",
+    "commitizen": "^4.2.4",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^8.0.1",
+    "eslint-config-airbnb": "^18.2.1",
     "eslint-config-next": "11.1.2",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-import-resolver-typescript": "^2.5.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.26.1",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^11.2.3",
+    "prettier": "^2.4.1",
     "typescript": "4.4.4"
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx}": [
+      "yarn type:check",
+      "yarn style:all"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
   }
 }

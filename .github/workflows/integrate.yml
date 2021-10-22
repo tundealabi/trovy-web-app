@@ -1,0 +1,38 @@
+name: Trovy Continuous Integration
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14]
+
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+
+      - run: echo "😎 The workflow is now ready to test your code on the runner."
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Run code typescript check
+        run: yarn run type:check
+
+      - name: Run code prettier check
+        run: yarn run prettier:check
+
+      - name: Run code lint check
+        run: yarn run lint:check

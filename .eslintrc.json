@@ -1,3 +1,47 @@
 {
-  "extends": "next/core-web-vitals"
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/resolver": {
+      "node": {
+        "extensions": [".ts", ".tsx", ".js"]
+      }
+    }
+  },
+  "extends": ["next", "next/core-web-vitals", "plugin:react/recommended", "airbnb", "prettier"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["react", "react-hooks", "@typescript-eslint"],
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/require-default-props": "off",
+    "jsx-a11y/media-has-caption": "off",
+    "react/jsx-filename-extension": ["warn", { "extensions": [".tsx", ".ts", ".js"] }],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "linebreak-style": ["error", "unix"],
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "no-mutable-exports": "off",
+    "react/no-danger": "off",
+    "react/prop-types": "off",
+    "max-len": ["warn", 120],
+    "no-param-reassign": "off",
+    "import/extensions": ["error", "never", { "svg": "always", "json": "always" }],
+    "no-underscore-dangle": ["error", { "allow": ["_id"] }],
+    "no-console": "error",
+    "prettier/prettier": "off"
+  }
 }
