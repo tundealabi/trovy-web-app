@@ -16,12 +16,21 @@
     "style:all": "yarn prettier:check && yarn lint:check"
   },
   "dependencies": {
+    "@emotion/react": "^11.5.0",
+    "@emotion/styled": "^11.3.0",
+    "@mui/icons-material": "^5.0.4",
+    "@mui/material": "^5.0.4",
+    "@mui/styled-engine-sc": "^5.0.3",
     "next": "11.1.2",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-icons": "^4.3.1",
+    "styled-components": "^5.3.3",
+    "typewriter-effect": "^2.18.2"
   },
   "devDependencies": {
     "@types/react": "17.0.31",
+    "@types/styled-components": "^5.1.15",
     "@typescript-eslint/eslint-plugin": "^5.1.0",
     "@typescript-eslint/parser": "^5.1.0",
     "commitizen": "^4.2.4",
@@ -35,6 +44,7 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.26.1",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "fork-ts-checker-webpack-plugin": "^6.4.0",
     "husky": "^7.0.4",
     "lint-staged": "^11.2.3",
     "prettier": "^2.4.1",

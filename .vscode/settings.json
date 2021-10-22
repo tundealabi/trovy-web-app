@@ -1,0 +1,13 @@
+{
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "editor.formatOnSave": true,
+  "eslint.alwaysShowStatus": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll.format": true,
+    "source.fixAll": true
+  },
+  "emmet.triggerExpansionOnTab": true,
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "editor.formatOnPaste": true
+}
