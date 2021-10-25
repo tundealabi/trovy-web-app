@@ -1,5 +1,4 @@
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import styled from 'styled-components';
 
 const LandingPageContainer = styled.div`
@@ -53,20 +52,10 @@ const LandingPageDescriptionSubtitle = styled(Typography)`
   margin-bottom: 2rem;
 `;
 
-const LandingPageAuthButton = styled(Button)`
-  background-color: #2dd882;
-  box-shadow: 0 8px 10px rgba(45, 216, 130, 0.3);
-
-  :hover {
-    background-color: #2dd882;
-  }
-`;
-
 export {
   LandingPageContainer,
   LandingPageMainContentContainer,
   LandingPageMainDescriptionContainer,
   LandingPageMainDescriptionHeading,
   LandingPageDescriptionSubtitle,
-  LandingPageAuthButton,
 };
