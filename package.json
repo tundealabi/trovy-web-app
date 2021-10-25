@@ -21,15 +21,20 @@
     "@mui/icons-material": "^5.0.4",
     "@mui/material": "^5.0.4",
     "@mui/styled-engine-sc": "^5.0.3",
+    "@reduxjs/toolkit": "^1.6.2",
+    "formik": "^2.2.9",
     "next": "11.1.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-icons": "^4.3.1",
+    "react-redux": "^7.2.5",
     "styled-components": "^5.3.3",
-    "typewriter-effect": "^2.18.2"
+    "typewriter-effect": "^2.18.2",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@types/react": "17.0.31",
+    "@types/redux-logger": "^3.0.9",
     "@types/styled-components": "^5.1.15",
     "@typescript-eslint/eslint-plugin": "^5.1.0",
     "@typescript-eslint/parser": "^5.1.0",
@@ -48,6 +53,7 @@
     "husky": "^7.0.4",
     "lint-staged": "^11.2.3",
     "prettier": "^2.4.1",
+    "redux-logger": "^3.0.6",
     "typescript": "4.4.4"
   },
   "lint-staged": {
