@@ -1,6 +1,7 @@
 import { useMediaQuery } from '@mui/material';
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import AppLayout from '../components/app_layout/Layout';
 // import Typewriter from 'typewriter-effect';
 import AppHeaderNav from '../components/app_header_nav/AppHeaderNav';
 import AuthDialog from '../components/auth/AuthModal';
@@ -20,7 +21,7 @@ const Home: NextPage = () => {
   const dispatch = useAppDispatch();
   const handleShowAuthDialog = () => dispatch(showAuthDialog('login'));
   return (
-    <>
+    <AppLayout>
       <AuthDialog />
       <LandingPageContainer>
         <Head>
@@ -49,7 +50,7 @@ const Home: NextPage = () => {
           </LandingPageMainDescriptionContainer>
         </LandingPageMainContentContainer>
       </LandingPageContainer>
-    </>
+    </AppLayout>
   );
 };
 
