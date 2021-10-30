@@ -1,7 +1,7 @@
 import Typography from '@mui/material/Typography';
 import styled from 'styled-components';
 
-const LandingPageContainer = styled.div`
+const LandingPageContainer = styled.main`
   min-height: 100vh;
   padding: 0 2.5rem;
   /* display: flex;
