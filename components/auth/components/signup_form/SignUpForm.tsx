@@ -25,6 +25,7 @@ const SignUpForm = () => {
       validationSchema={signupSchema}
       initialValues={init}
       onSubmit={async (values, { setFieldError }) => {
+        setDisableBtn(true);
         try {
           // console.log('values',values)
           const {

@@ -1,11 +1,6 @@
 import axios from 'axios';
 import { IuserLoginHelper, IuserSignupHelper } from './api-user.interface';
 
-const appUrl =
-  process.env.NODE_ENV === 'production'
-    ? 'https://https://trovy-loan.vercel.app/'
-    : 'http://localhost:3000';
-
 const userLoginHelper = async ({ email, password }: IuserLoginHelper) => {
   const response = await axios({
     method: 'post',
@@ -38,7 +33,7 @@ const userSignupHelper = async (userData: IuserSignupHelper) => {
 const userSessionHelper = async (userEmail: string) => {
   const response = await axios({
     method: 'post',
-    url: `${appUrl}/api/user/session`,
+    url: `${process.env.NEXTAUTH_URL}/api/user/session`,
     data: {
       email: userEmail,
     },
