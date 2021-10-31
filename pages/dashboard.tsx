@@ -1,6 +1,7 @@
 import { NextPage } from 'next';
 import { MouseEvent, useState } from 'react';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
+import { getSession, GetSessionParams } from 'next-auth/react';
 import AppLayout from '../components/app_layout/Layout';
 import {
   DashboardContentContainer,
@@ -89,6 +90,21 @@ const Dashboard: NextPage = () => {
       </DashboardPageContainer>
     </AppLayout>
   );
+};
+
+export const getServerSideProps = async (context: GetSessionParams | undefined) => {
+  const session = await getSession(context);
+  if (session) {
+    return {
+      props: { session },
+    };
+  }
+  return {
+    redirect: {
+      destination: '/',
+      permanent: false,
+    },
+  };
 };
 
 export default Dashboard;
