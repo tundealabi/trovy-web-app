@@ -12,9 +12,13 @@ const AppHeaderNavToolBar = styled(ToolBar)`
   background: -webkit-linear-gradient(to right, #ffffff, #abbaab);
   /* for W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   background: linear-gradient(to right, #ffffff, #abbaab);
-  padding: 0 2rem;
+  padding: 0 1rem;
   box-shadow: 0px 1px 2px 1px rgba(134, 134, 134, 0.1);
-  @media (min-width: 710px) {
+
+  @media (min-width: 510px) {
+    padding: 0 2rem;
+  }
+  @media (min-width: 910px) {
     padding: 0 9.3rem;
   }
 `;
@@ -29,4 +33,11 @@ const AppHeaderNavLogoContainer = styled.div`
   }
 `;
 
-export { AppHeaderNavContainer, AppHeaderNavToolBar, AppHeaderNavLogoContainer };
+const AppHeaderNavUserPresenceContainer = styled.div``;
+
+export {
+  AppHeaderNavContainer,
+  AppHeaderNavToolBar,
+  AppHeaderNavLogoContainer,
+  AppHeaderNavUserPresenceContainer,
+};

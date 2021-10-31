@@ -1,6 +1,8 @@
 import { useMediaQuery } from '@mui/material';
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 import AppLayout from '../components/app_layout/Layout';
 // import Typewriter from 'typewriter-effect';
 import AppHeaderNav from '../components/app_header_nav/AppHeaderNav';
@@ -17,9 +19,17 @@ import {
 } from '../styles/Landing.styled';
 
 const Home: NextPage = () => {
+  const { status } = useSession();
+  const router = useRouter();
   const matchesScreen = useMediaQuery('(min-width:211100px)');
   const dispatch = useAppDispatch();
-  const handleShowAuthDialog = () => dispatch(showAuthDialog('login'));
+  const handleAuth = () => {
+    if (status === 'authenticated') {
+      router.push('/dashboard');
+    } else {
+      dispatch(showAuthDialog('login'));
+    }
+  };
   return (
     <AppLayout>
       <AuthDialog />
@@ -44,8 +54,8 @@ const Home: NextPage = () => {
               Invest in American, Chinese and Nigerian stocks, Bonds, ETFs and more with as little
               as ₦1,000
             </LandingPageDescriptionSubtitle>
-            <AuthButton variant='contained' onClick={handleShowAuthDialog}>
-              Login
+            <AuthButton variant='contained' onClick={handleAuth}>
+              {status === 'authenticated' ? 'dashboard' : 'login'}
             </AuthButton>
           </LandingPageMainDescriptionContainer>
         </LandingPageMainContentContainer>

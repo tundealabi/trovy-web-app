@@ -5,10 +5,12 @@ import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { signIn } from 'next-auth/react';
 import TextField from '../../../shared/text_field/TextField';
 import signupSchema from './signup-form.schema';
 import init from './signup-form.utils';
 import { LoginSignupAuthButton, LoginSignupAuthButtonContainer } from '../../AuthModal.styled';
+import { userSignupHelper } from '../../../../utils/api_helpers/api_user/api-user.helper';
 
 const SignUpForm = () => {
   const [disableBtn, setDisableBtn] = useState(false);
@@ -17,6 +19,7 @@ const SignUpForm = () => {
 
   const handleShowPassword = () => setShowPassword(!showPassword);
   const handleShowConfirmPassword = () => setShowConfirmPassword(!showConfirmPassword);
+
   return (
     <Formik
       validationSchema={signupSchema}
@@ -24,9 +27,27 @@ const SignUpForm = () => {
       onSubmit={async (values, { setFieldError }) => {
         try {
           // console.log('values',values)
+          const {
+            first_name: firstName,
+            last_name: lastName,
+            email,
+            user_phone: phoneNumber,
+            password,
+          } = values;
+          const userEmailResponse: string = await userSignupHelper({
+            firstName,
+            lastName,
+            email,
+            phoneNumber,
+            password,
+          });
+          signIn('credentials', {
+            email: userEmailResponse,
+            callbackUrl: `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/dashboard`,
+          });
         } catch (err: any) {
           setDisableBtn(false);
-          setFieldError('password', err.message);
+          setFieldError('password_confirmation', err.message);
         }
       }}
     >
