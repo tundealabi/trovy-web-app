@@ -29,6 +29,7 @@ const LoginForm = () => {
             email: userEmailResponse,
             callbackUrl: `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/dashboard`,
           });
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (err: any) {
           setDisableBtn(false);
           setFieldError('password', err.message);

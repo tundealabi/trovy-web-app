@@ -8,25 +8,26 @@ import {
   LoanInterfaceTableCell,
   LoanInterfaceTableBodyCell,
   LoanInterfaceActionButton,
-  LoanInterfaceActionPayChip,
 } from './LoanInterfaceTable.styled';
+import ILoanModel from '../../../../db/models/loan/loan-model.interface';
+import PaystackPayButton from '../paystack_pay_button/PaystackPayButton';
 
-function createData(month: string, status: string, completed: boolean) {
-  return { month, status, completed };
+interface ISchedule {
+  _id: string;
+  month: string;
+  proratedPayment: string;
+  status: string;
 }
 
-const rows = [
-  createData('january', 'active', false),
-  createData('february', 'due', false),
-  createData('december', 'completed', true),
-  createData('july', 'due', false),
-  createData('november', 'active', false),
-];
+const disablePayButton = (idx: number, data: Array<ISchedule>) => {
+  if (idx > 0) {
+    return data[idx - 1].status !== 'completed';
+  }
+  return false;
+};
 
-// eslint-disable-next-line no-console
-const handlePayment = () => console.log('launch paystack');
-
-const LoanInterfaceTable = () => {
+const LoanInterfaceTable = (loanData: ILoanModel) => {
+  const { _id, loanSchedule } = loanData;
   const minWidth = 250;
   return (
     <TableContainer>
@@ -39,22 +40,27 @@ const LoanInterfaceTable = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.month} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+          {loanSchedule.map((schedule, idx, arrayData) => (
+            <TableRow
+              key={schedule._id as string}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
               <LoanInterfaceTableBodyCell component='th' scope='row'>
-                {row.month}
+                {schedule.month}
               </LoanInterfaceTableBodyCell>
-              <LoanInterfaceTableBodyCell align='center'>{row.status}</LoanInterfaceTableBodyCell>
               <LoanInterfaceTableBodyCell align='center'>
-                {row.completed ? (
+                {schedule.status}
+              </LoanInterfaceTableBodyCell>
+              <LoanInterfaceTableBodyCell align='center'>
+                {schedule.status === 'completed' ? (
                   <LoanInterfaceActionButton>
                     <CheckCircleIcon />
                   </LoanInterfaceActionButton>
                 ) : (
-                  <LoanInterfaceActionPayChip
-                    label='pay now'
-                    variant='outlined'
-                    onClick={handlePayment}
+                  <PaystackPayButton
+                    amount={Number(schedule.proratedPayment)}
+                    reference={{ loanId: _id as string, scheduleId: schedule._id as string }}
+                    disabled={disablePayButton(idx, arrayData)}
                   />
                 )}
               </LoanInterfaceTableBodyCell>

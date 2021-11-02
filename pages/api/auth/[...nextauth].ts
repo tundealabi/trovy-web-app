@@ -42,5 +42,5 @@ const options = {
     },
   },
 };
-
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default (req: NextApiRequest, res: NextApiResponse) => NextAuth(req, res, options as any);

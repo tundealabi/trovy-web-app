@@ -14,11 +14,10 @@ const LoanInterfaceSummary = styled(AccordionSummary)`
     justify-content: space-between;
   }
 `;
-const LoanInterfaceStatusText = styled(Typography)`
+const LoanInterfaceStatusText = styled(Typography)<{ isCompleted: boolean }>`
   flex-basis: 50%;
-
   > span {
-    color: orange;
+    color: ${(props) => (props.isCompleted ? '#2dd882' : 'orange')};
     padding-left: 0.43rem;
   }
 `;

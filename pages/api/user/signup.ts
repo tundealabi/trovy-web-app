@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import nc from 'next-connect';
 import dbConnect from '../../../db/db-connect';
-import User from '../../../db/models/user/user-model';
+import User from '../../../db/models/user/user.model';
 import UserPassword from '../../../db/models/user_password/user-password.model';
 import { IuserSignupHelper } from '../../../utils/api_helpers/api_user/api-user.interface';
 
@@ -31,6 +31,7 @@ signupHandler.post(async (req, res) => {
       await newUserPassword.save();
       return res.send(newUser.email);
     }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     // console.log('login-user-err', err);
     return res.json({

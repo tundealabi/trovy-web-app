@@ -1,3 +1,4 @@
+import currencyFormatter from 'currency-formatter';
 import Accordion from '@mui/material/Accordion';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {
@@ -8,9 +9,10 @@ import {
   LoanInterfaceSummary,
 } from './LoanInterface.styled';
 import LoanInterfaceTable from '../loan_interface_table/LoanInterfaceTable';
+import ILoanModel from '../../../../db/models/loan/loan-model.interface';
 
-const LoanInterface = () => {
-  const monthCount = 4;
+const LoanInterface = (loanData: ILoanModel) => {
+  const { loanStatus, loanAmount } = loanData;
   return (
     <LoanInterfaceContainer>
       <Accordion>
@@ -19,17 +21,17 @@ const LoanInterface = () => {
           aria-controls='panel1a-content'
           id='panel1a-header'
         >
-          <LoanInterfaceStatusText>
+          <LoanInterfaceStatusText isCompleted={loanStatus === 'completed'}>
             status:
-            <span>active</span>
+            <span>{loanStatus}</span>
           </LoanInterfaceStatusText>
           <LoanInterfaceDurationText>
-            duration:
-            <span>{monthCount} months</span>
+            amount:
+            <span>{currencyFormatter.format(Number(loanAmount), { code: '' })}</span>
           </LoanInterfaceDurationText>
         </LoanInterfaceSummary>
         <LoanInterfaceDetails>
-          <LoanInterfaceTable />
+          <LoanInterfaceTable {...loanData} />
         </LoanInterfaceDetails>
       </Accordion>
     </LoanInterfaceContainer>

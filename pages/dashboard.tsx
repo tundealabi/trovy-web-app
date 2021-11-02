@@ -15,6 +15,7 @@ import {
 import DashboardPortfolio from '../components/dashboard_portfolio/DashboardPortfolio';
 import DashboardLoan from '../components/dashboard_loan/DashboardLoan';
 import DashboardAccount from '../components/dashboard_account/DashboardAccount';
+import GlobalModal from '../components/shared/modal/Modal';
 
 interface handleCurrentViewProps {
   id: string;
@@ -88,6 +89,7 @@ const Dashboard: NextPage = () => {
           <DashboardContentContainer>{render(currentView.value)}</DashboardContentContainer>
         </DashboardPageOverviewContainer>
       </DashboardPageContainer>
+      <GlobalModal />
     </AppLayout>
   );
 };
