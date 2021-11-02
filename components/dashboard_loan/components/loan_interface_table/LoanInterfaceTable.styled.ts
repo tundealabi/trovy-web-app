@@ -12,6 +12,7 @@ const LoanInterfaceTableBodyCell = styled(TableCell)`
 `;
 
 const LoanInterfaceActionButton = styled(IconButton)`
+  cursor: not-allowed;
   > .MuiSvgIcon-root {
     color: #2dd882;
   }

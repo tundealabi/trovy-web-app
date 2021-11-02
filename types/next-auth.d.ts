@@ -12,6 +12,8 @@ declare module 'next-auth' {
       firstName: string;
       /** The user's account lastname. */
       lastName: string;
+      /** The user's account email. */
+      email: string;
     };
   }
 }

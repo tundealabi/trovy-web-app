@@ -1,8 +1,9 @@
 interface IUserModel {
-  firstName: String;
-  lastName: String;
-  email: String;
-  phoneNumber: String;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  loans: Array<string>;
 }
 
 export default IUserModel;

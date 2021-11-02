@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import nc from 'next-connect';
 import dbConnect from '../../../db/db-connect';
-import User from '../../../db/models/user/user-model';
+import User from '../../../db/models/user/user.model';
 import UserPassword from '../../../db/models/user_password/user-password.model';
 
 const loginHandler = nc<NextApiRequest, NextApiResponse>();
@@ -26,6 +26,7 @@ loginHandler.post(async (req, res) => {
       return res.send(user.email);
     }
     throw new Error('Wrong login details');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     // console.log('login-user-err', err);
     return res.json({

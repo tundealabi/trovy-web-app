@@ -1,6 +1,7 @@
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
 import authDialogSliceReducer from './auth_dialog/auth-dialog.slice';
+import globalModalSliceReducer from './global_modal/global-modal.slice';
 
 const middlewares = [...getDefaultMiddleware()];
 if (process.env.NODE_ENV !== 'production') middlewares.push(logger);
@@ -8,6 +9,7 @@ if (process.env.NODE_ENV !== 'production') middlewares.push(logger);
 export const store = configureStore({
   reducer: {
     authDialog: authDialogSliceReducer,
+    globalModal: globalModalSliceReducer,
   },
   middleware: (getDefaultMiddlewares) => getDefaultMiddlewares().concat(middlewares),
 });

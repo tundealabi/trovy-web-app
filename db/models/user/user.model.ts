@@ -7,6 +7,7 @@ const userSchema = new Schema(
     lastName: { type: String, lowercase: true, required: true },
     email: { type: String, lowercase: true, required: true },
     phoneNumber: { type: String, required: true },
+    loans: [{ type: Schema.Types.ObjectId, ref: 'loan' }],
   },
   { timestamps: true }
 );
@@ -17,7 +18,7 @@ let User: Model<IUserModel>;
 try {
   User = model<IUserModel>('user');
 } catch (error) {
-  User = model<IUserModel>('user', userSchema, 'users');
+  User = model<IUserModel>('user', userSchema);
 }
 
 export default User;

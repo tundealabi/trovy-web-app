@@ -2,6 +2,8 @@
 import NextLink from 'next/link';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import {
   AppHeaderNavContainer,
   AppHeaderNavLogoContainer,
@@ -12,6 +14,13 @@ import UserPresence from './components/user_presence/UserPresence';
 
 const AppHeaderNav = () => {
   const { data: session, status } = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (status !== 'loading' && !session) {
+      router.push('/');
+    }
+  }, [session, status, router]);
   return (
     <AppHeaderNavContainer>
       <AppHeaderNavToolBar>
