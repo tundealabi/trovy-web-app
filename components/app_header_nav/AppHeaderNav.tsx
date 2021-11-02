@@ -20,7 +20,8 @@ const AppHeaderNav = () => {
     if (status !== 'loading' && !session) {
       router.push('/');
     }
-  }, [session, status, router]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [session, status]);
   return (
     <AppHeaderNavContainer>
       <AppHeaderNavToolBar>
