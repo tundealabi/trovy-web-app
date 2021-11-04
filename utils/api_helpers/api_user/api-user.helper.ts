@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IuserLoginHelper, IuserSignupHelper } from './api-user.interface';
+import { IUserAuthTokenHelper, IuserLoginHelper, IuserSignupHelper } from './api-user.interface';
 
 const userLoginHelper = async ({ email, password }: IuserLoginHelper) => {
   const response = await axios({
@@ -16,6 +16,23 @@ const userLoginHelper = async ({ email, password }: IuserLoginHelper) => {
   }
   return response.data;
 };
+
+const userVerifyAuthTokenHelper = async (userData: IUserAuthTokenHelper) => {
+  const response = await axios({
+    method: 'post',
+    url: '/api/user/token-verification',
+    data: {
+      userId: userData.userId,
+      userToken: userData.userToken,
+    },
+  });
+  // console.log('resp-login', response);
+  if (response.data.error) {
+    throw new Error(response.data.errorMessage);
+  }
+  return response.data;
+};
+
 const userSignupHelper = async (userData: IuserSignupHelper) => {
   const response = await axios({
     method: 'post',
@@ -42,4 +59,4 @@ const userSessionHelper = async (userEmail: string) => {
   return response.data;
 };
 
-export { userLoginHelper, userSignupHelper, userSessionHelper };
+export { userLoginHelper, userVerifyAuthTokenHelper, userSignupHelper, userSessionHelper };

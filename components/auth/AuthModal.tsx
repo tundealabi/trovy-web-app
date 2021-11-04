@@ -29,7 +29,7 @@ const AuthDialog = () => {
       </AuthDialogTitleContainer>
       {content === 'login' ? <LoginForm /> : <SignUpForm />}
       <AuthHaveAccount>
-        Already have an account?{' '}
+        {content === 'login' ? "Don't have an account" : 'Already have an account?'}{' '}
         <span onClick={handleSwitchAuthDialog} aria-hidden='true'>
           {content === 'login' ? 'sign up' : 'login'}
         </span>

@@ -9,26 +9,52 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import TextField from '../../../shared/text_field/TextField';
 import loginSchema from './login-form.schema';
 import { LoginSignupAuthButton, LoginSignupAuthButtonContainer } from '../../AuthModal.styled';
-import { userLoginHelper } from '../../../../utils/api_helpers/api_user/api-user.helper';
+import {
+  userLoginHelper,
+  userVerifyAuthTokenHelper,
+} from '../../../../utils/api_helpers/api_user/api-user.helper';
 
 const LoginForm = () => {
   const [disableBtn, setDisableBtn] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [sendingAuthToken, setSendingAuthToken] = useState(false);
+  const [authToken, setAuthToken] = useState('');
+  const [userInfo, setUserInfo] = useState({ userId: '', userEmail: '' });
+  const [tokenFieldHelperText, setTokenFieldHelperText] = useState(
+    'Enter token sent to your email.'
+  );
   const initialValues: { email: string; password: string } = { email: '', password: '' };
   const handleShowPassword = () => setShowPassword(!showPassword);
+
+  const handleVerifyUserToken = async () => {
+    const isTokenVerified = await userVerifyAuthTokenHelper({
+      userId: userInfo.userId,
+      userToken: authToken,
+    });
+    if (isTokenVerified) {
+      signIn('credentials', {
+        email: userInfo.userEmail,
+        callbackUrl: `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/dashboard`,
+      });
+    } else {
+      setTokenFieldHelperText('Invalid token.');
+    }
+  };
 
   return (
     <Formik
       validationSchema={loginSchema}
       initialValues={initialValues}
       onSubmit={async (values, { setFieldError }) => {
-        setDisableBtn(true);
+        // setDisableBtn(true);
         try {
-          const userEmailResponse: string = await userLoginHelper(values);
-          signIn('credentials', {
-            email: userEmailResponse,
-            callbackUrl: `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/dashboard`,
-          });
+          const userLoginResponse: { userId: string; email: string } = await userLoginHelper(
+            values
+          );
+          if (userLoginResponse) {
+            setUserInfo({ userId: userLoginResponse.userId, userEmail: userLoginResponse.email });
+            setSendingAuthToken(true);
+          }
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (err: any) {
           setDisableBtn(false);
@@ -51,6 +77,7 @@ const LoginForm = () => {
             helperText={touched.email && errors.email}
             fullWidth
             margin='normal'
+            disabled={sendingAuthToken}
           />
           <Box mt={1.5} mb={1.5} />
           <TextField
@@ -79,11 +106,40 @@ const LoginForm = () => {
                 </InputAdornment>
               ),
             }}
+            disabled={sendingAuthToken}
           />
+          {sendingAuthToken ? (
+            <>
+              <Box mt={1.5} mb={1.5} />
+              <TextField
+                type='text'
+                id='user-token'
+                label='Token'
+                variant='filled'
+                value={authToken}
+                onChange={(ev) => setAuthToken(ev.target.value)}
+                error={!!(touched.email && errors.email)}
+                helperText={tokenFieldHelperText}
+                fullWidth
+                margin='normal'
+              />
+            </>
+          ) : null}
           <LoginSignupAuthButtonContainer>
-            <LoginSignupAuthButton disabled={disableBtn} type='submit' fullWidth>
-              login
-            </LoginSignupAuthButton>
+            {authToken.trim().length === 6 ? (
+              <LoginSignupAuthButton
+                disabled={disableBtn}
+                type='button'
+                fullWidth
+                onClick={handleVerifyUserToken}
+              >
+                verify
+              </LoginSignupAuthButton>
+            ) : (
+              <LoginSignupAuthButton disabled={disableBtn} type='submit' fullWidth>
+                {sendingAuthToken ? 'resend token' : 'login'}
+              </LoginSignupAuthButton>
+            )}
           </LoginSignupAuthButtonContainer>
         </form>
       )}
