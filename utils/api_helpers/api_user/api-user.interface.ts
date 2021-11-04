@@ -10,4 +10,9 @@ interface IuserSignupHelper {
   password: string;
 }
 
-export type { IuserLoginHelper, IuserSignupHelper };
+interface IUserAuthTokenHelper {
+  userId: string;
+  userToken: string;
+}
+
+export type { IuserLoginHelper, IuserSignupHelper, IUserAuthTokenHelper };
