@@ -16,6 +16,8 @@ import DashboardPortfolio from '../components/dashboard_portfolio/DashboardPortf
 import DashboardLoan from '../components/dashboard_loan/DashboardLoan';
 import DashboardAccount from '../components/dashboard_account/DashboardAccount';
 import GlobalModal from '../components/shared/modal/Modal';
+import AuthDialog from '../components/auth/AuthModal';
+import SnackBar from '../components/snackbar/Snackbar';
 
 interface handleCurrentViewProps {
   id: string;
@@ -63,6 +65,8 @@ const Dashboard: NextPage = () => {
   };
   return (
     <AppLayout>
+      <AuthDialog />
+      <SnackBar />
       <DashboardPageContainer>
         <DashboardPageOverviewContainer>
           <DashboardNavigationContainer>

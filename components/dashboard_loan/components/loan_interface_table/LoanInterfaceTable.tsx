@@ -9,7 +9,7 @@ import {
   LoanInterfaceTableBodyCell,
   LoanInterfaceActionButton,
 } from './LoanInterfaceTable.styled';
-import ILoanModel from '../../../../db/models/loan/loan-model.interface';
+import { ILoanModel } from '../../../../db/models/loan/loan-model.interface';
 import PaystackPayButton from '../paystack_pay_button/PaystackPayButton';
 
 interface ISchedule {

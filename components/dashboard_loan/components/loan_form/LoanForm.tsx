@@ -9,6 +9,7 @@ import getTotalPortfolioValue from '../../../dashboard_portfolio/dashboard-portf
 import { loanApplyHelper } from '../../../../utils/api_helpers/api_loan/api-loan.helper';
 import { resetGlobalModal } from '../../../../redux/global_modal/global-modal.slice';
 import { useAppDispatch } from '../../../../redux/hooks';
+import { activateSnackbar } from '../../../../redux/snackbar/snackbar.slice';
 
 const LoanForm = () => {
   const dispatch = useAppDispatch();
@@ -37,6 +38,7 @@ const LoanForm = () => {
           // console.log('loan-resp',loanApplyResponse);
           queryClient.invalidateQueries('getLoans');
           dispatch(resetGlobalModal());
+          dispatch(activateSnackbar({ content: 'Loan successfully granted', severity: 'success' }));
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (err: any) {
           setDisableSubmitBtn(false);
@@ -47,7 +49,7 @@ const LoanForm = () => {
       {({ handleSubmit, handleChange, handleBlur, values, touched, errors }) => (
         <form noValidate onSubmit={handleSubmit}>
           <TextField
-            inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+            inputProps={{ inputMode: 'decimal', pattern: '[0-9]*' }}
             id='loan-amount'
             label='Loan Amount'
             variant='filled'
@@ -71,7 +73,7 @@ const LoanForm = () => {
             onChange={(e) => {
               const loanPercentage = Number(e.target.value);
               if (loanPercentage > 0 && loanPercentage <= 60) {
-                values.loan_amount = (totalMoney / loanPercentage).toFixed();
+                values.loan_amount = (totalMoney / loanPercentage).toFixed(2);
               }
               handleChange(e);
             }}

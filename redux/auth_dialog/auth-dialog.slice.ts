@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface AuthDialogSliceStateProps {
   isVisible: boolean;
-  content: 'login' | 'signup';
+  content: 'login' | 'signup' | 'password-change';
 }
 
 const initialState: AuthDialogSliceStateProps = {

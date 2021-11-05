@@ -14,7 +14,7 @@ loanApplyHandler.post(async (req, res) => {
   const { loanAmount, loanPercentage, loanSpreadDuration, loanDate }: ILoanApplyHelper = req.body;
   try {
     const months = getDateMonthRange(loanDate, loanSpreadDuration);
-    const monthlySpreadAmount = (Number(loanAmount) / Number(loanSpreadDuration)).toFixed();
+    const monthlySpreadAmount = (Number(loanAmount) / Number(loanSpreadDuration)).toFixed(2);
     const paymentMonthlySchedule = months.map((month) => ({
       proratedPaymentId: uuidv4(),
       month: month.toLowerCase(),

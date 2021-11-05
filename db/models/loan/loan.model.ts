@@ -1,5 +1,5 @@
 import { Schema, model, Model } from 'mongoose';
-import ILoanModel from './loan-model.interface';
+import { ILoanModel } from './loan-model.interface';
 
 const loanSchema = new Schema(
   {

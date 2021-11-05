@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import mailerTransport from '../create-mailing-transport';
 
 type confirmationMailProps = {
@@ -23,9 +24,9 @@ const sendTwoFactorAuthCodeMail = async ({
                           <p>Copy this token ${token} and paste in the form to log into your account</p>
                       </div>`,
     });
-    // console.log('sendtransport ran');
+    console.log('sendtransport ran');
   } catch (err) {
-    // console.log('nodemailer-transport', err);
+    console.log('nodemailer-transport', err);
   }
 };
 
