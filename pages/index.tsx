@@ -17,6 +17,7 @@ import {
   LandingPageMainDescriptionContainer,
   LandingPageMainDescriptionHeading,
 } from '../styles/Landing.styled';
+import SnackBar from '../components/snackbar/Snackbar';
 
 const Home: NextPage = () => {
   const { status } = useSession();
@@ -33,6 +34,7 @@ const Home: NextPage = () => {
   return (
     <AppLayout>
       <AuthDialog />
+      <SnackBar />
       <LandingPageContainer>
         <Head>
           <title>Trove - Invest in US, Chinese Stocks From Nigeria</title>
