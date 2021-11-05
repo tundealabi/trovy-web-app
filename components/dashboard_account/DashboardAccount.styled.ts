@@ -40,6 +40,7 @@ const DashboardAccountChangePasswordButton = styled(IconButton)`
   text-transform: capitalize;
   font-size: 1.24rem;
   margin-top: 1rem;
+  border-radius: 20px;
 `;
 
 export {

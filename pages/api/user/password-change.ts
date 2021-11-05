@@ -9,6 +9,7 @@ import UserPassword from '../../../db/models/user_password/user-password.model';
 const passwordChangeHandler = nc<NextApiRequest, NextApiResponse>();
 
 passwordChangeHandler.post(async (req, res) => {
+  const errorMessage = 'wrong details';
   const session = await getSession({ req });
   const { currentPassword, newPassword }: IuserPasswordChangeHelper = req.body;
   try {
@@ -25,9 +26,9 @@ passwordChangeHandler.post(async (req, res) => {
         );
         return res.json({ success: true });
       }
-      throw new Error('wrong details');
+      throw new Error(errorMessage);
     } else {
-      throw new Error('wrong details');
+      throw new Error(errorMessage);
     }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -35,7 +36,7 @@ passwordChangeHandler.post(async (req, res) => {
     // console.log('login-user-err', err);
     return res.json({
       error: true,
-      errorMessage: err.message,
+      errorMessage: err.message === errorMessage ? errorMessage : 'something went wrong',
     });
   }
 });

@@ -36,7 +36,7 @@ loanApplyHandler.post(async (req, res) => {
     // console.log('login-user-err', err);
     return res.json({
       error: true,
-      errorMessage: err.message,
+      errorMessage: 'something went wrong',
     });
   }
 });
