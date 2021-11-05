@@ -55,6 +55,7 @@ const LoginForm = () => {
             values
           );
           if (userLoginResponse) {
+            setDisableBtn(false);
             setUserInfo({ userId: userLoginResponse.userId, userEmail: userLoginResponse.email });
             setSendingAuthToken(true);
             dispatch(
