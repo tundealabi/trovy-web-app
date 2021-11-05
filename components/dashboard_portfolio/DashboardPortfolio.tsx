@@ -13,7 +13,7 @@ const DashboardPortfolio = () => (
   <DashboardPortfolioContainer>
     <DashboardPortfolioValueContainer>
       <DashboardPortfolioValue>
-        Portfolio Value: {currencyFormatter.format(getTotalPortfolioValue(), { code: '' })}
+        Portfolio Value: {currencyFormatter.format(getTotalPortfolioValue(), { symbol: '$' })}
       </DashboardPortfolioValue>
     </DashboardPortfolioValueContainer>
     <Grid container spacing={2}>

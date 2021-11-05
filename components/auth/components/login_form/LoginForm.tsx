@@ -13,8 +13,11 @@ import {
   userLoginHelper,
   userVerifyAuthTokenHelper,
 } from '../../../../utils/api_helpers/api_user/api-user.helper';
+import { activateSnackbar } from '../../../../redux/snackbar/snackbar.slice';
+import { useAppDispatch } from '../../../../redux/hooks';
 
 const LoginForm = () => {
+  const dispatch = useAppDispatch();
   const [disableBtn, setDisableBtn] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [sendingAuthToken, setSendingAuthToken] = useState(false);
@@ -46,18 +49,17 @@ const LoginForm = () => {
       validationSchema={loginSchema}
       initialValues={initialValues}
       onSubmit={async (values, { setFieldError }) => {
-        // setDisableBtn(true);
+        setDisableBtn(true);
         try {
           const userLoginResponse: { userId: string; email: string } = await userLoginHelper(
             values
           );
           if (userLoginResponse) {
-            //       signIn('credentials', {
-            //   email: userLoginResponse.email,
-            //   callbackUrl: `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/dashboard`,
-            // });
             setUserInfo({ userId: userLoginResponse.userId, userEmail: userLoginResponse.email });
             setSendingAuthToken(true);
+            dispatch(
+              activateSnackbar({ content: 'Check your mail for a token', severity: 'success' })
+            );
           }
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (err: any) {

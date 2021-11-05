@@ -3,8 +3,8 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
+import Typewriter from 'typewriter-effect';
 import AppLayout from '../components/app_layout/Layout';
-// import Typewriter from 'typewriter-effect';
 import AppHeaderNav from '../components/app_header_nav/AppHeaderNav';
 import AuthDialog from '../components/auth/AuthModal';
 import AuthButton from '../components/shared/auth_button/AuthButton';
@@ -47,7 +47,13 @@ const Home: NextPage = () => {
         <LandingPageMainContentContainer showbackgroundimage={matchesScreen}>
           <LandingPageMainDescriptionContainer>
             <LandingPageMainDescriptionHeading variant='h1'>
-              Loaning simplified
+              <Typewriter
+                options={{
+                  strings: 'Loaning simplified',
+                  autoStart: true,
+                  loop: true,
+                }}
+              />
             </LandingPageMainDescriptionHeading>
             <LandingPageDescriptionSubtitle>
               Forget high account opening fees. Become a global investor with the tap of a button.

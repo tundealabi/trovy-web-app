@@ -3,6 +3,7 @@
 
 echo '🏗️👷 Linting, testing and building your project before committing'
 
+yarn run test
 yarn lint-staged
 
 # If everything passes... Now we can commit

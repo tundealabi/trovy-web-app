@@ -15,8 +15,8 @@ const PortfolioCard = (props: IPortfolioCard) => {
         <PortfolioSymbolText>{symbol}</PortfolioSymbolText>
         <PortfolioInformationContainer>
           <PortfolioInformationText>Total Quantity: {totalQuantity}</PortfolioInformationText>
-          <PortfolioInformationText>Equity Value: {equityValue}</PortfolioInformationText>
-          <PortfolioInformationText>Price Per Share: {pricePerShare}</PortfolioInformationText>
+          <PortfolioInformationText>Equity Value: ${equityValue}</PortfolioInformationText>
+          <PortfolioInformationText>Price Per Share: ${pricePerShare}</PortfolioInformationText>
         </PortfolioInformationContainer>
       </PortfolioCardContentContainer>
     </PortfolioCardContainer>

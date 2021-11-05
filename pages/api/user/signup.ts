@@ -8,6 +8,7 @@ import { IuserSignupHelper } from '../../../utils/api_helpers/api_user/api-user.
 const signupHandler = nc<NextApiRequest, NextApiResponse>();
 
 signupHandler.post(async (req, res) => {
+  const errorMessage = 'Email already taken';
   const { firstName, lastName, email, phoneNumber, password }: IuserSignupHelper = req.body;
   try {
     dbConnect();
@@ -15,7 +16,7 @@ signupHandler.post(async (req, res) => {
       email,
     }).select(['_id', 'email']);
     if (user) {
-      throw new Error('Email already taken');
+      throw new Error(errorMessage);
     } else {
       const newUser = await User.create({
         firstName,
@@ -36,7 +37,7 @@ signupHandler.post(async (req, res) => {
     // console.log('login-user-err', err);
     return res.json({
       error: true,
-      errorMessage: err.message,
+      errorMessage: err.message === errorMessage ? errorMessage : 'Something went wrong',
     });
   }
 });

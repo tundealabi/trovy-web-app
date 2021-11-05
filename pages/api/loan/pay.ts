@@ -8,6 +8,7 @@ import { ILoanPayHelper } from '../../../utils/api_helpers/api_loan/api-loan.int
 const loanPayHandler = nc<NextApiRequest, NextApiResponse>();
 
 loanPayHandler.post(async (req, res) => {
+  const errorMessage = 'Loan payment failed';
   const { loanId, proratedPaymentId }: ILoanPayHelper = req.body;
   try {
     const session = await getSession({ req });
@@ -30,13 +31,13 @@ loanPayHandler.post(async (req, res) => {
       }
       return res.json({ success: true });
     }
-    throw new Error('Could not pay your loan');
+    throw new Error(errorMessage);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     // console.log('login-user-err', err);
     return res.json({
       error: true,
-      errorMessage: err.message,
+      errorMessage: err.message === errorMessage ? errorMessage : 'something went wrong',
     });
   }
 });

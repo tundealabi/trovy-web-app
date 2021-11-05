@@ -85,7 +85,6 @@
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [
-      "yarn test",
       "yarn type:check",
       "yarn style:all"
     ]

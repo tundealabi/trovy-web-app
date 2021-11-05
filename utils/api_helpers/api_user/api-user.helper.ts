@@ -73,6 +73,9 @@ const userPasswordChangeHelper = async (passwordData: IuserPasswordChangeHelper)
     },
   });
   // console.log('resp-login', response);
+  if (response.data.error) {
+    throw new Error(response.data.errorMessage);
+  }
   return response.data;
 };
 
