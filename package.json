@@ -6,6 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "test": "jest",
+    "dev:test": "jest --watch",
     "lint": "next lint",
     "commit:changes": "git-cz",
     "prepare": "husky install",
@@ -47,6 +49,8 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.15.0",
+    "@testing-library/react": "^12.1.2",
     "@types/bcrypt": "^5.0.0",
     "@types/currency-formatter": "^1.5.1",
     "@types/nodemailer": "^6.4.4",
@@ -57,6 +61,7 @@
     "@types/uuid": "^8.3.1",
     "@typescript-eslint/eslint-plugin": "^5.1.0",
     "@typescript-eslint/parser": "^5.1.0",
+    "babel-jest": "^27.3.1",
     "commitizen": "^4.2.4",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.1.0",
@@ -70,13 +75,17 @@
     "eslint-plugin-react-hooks": "^4.2.1-alpha-9fb344225-20211102",
     "fork-ts-checker-webpack-plugin": "^6.4.0",
     "husky": "^7.0.4",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^27.3.1",
     "lint-staged": "^11.2.3",
     "prettier": "^2.4.1",
+    "react-test-renderer": "^17.0.2",
     "redux-logger": "^3.0.6",
     "typescript": "4.4.4"
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [
+      "yarn test",
       "yarn type:check",
       "yarn style:all"
     ]

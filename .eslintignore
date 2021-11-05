@@ -42,3 +42,6 @@ public
 
 # next-auth-typescript
 /types/next-auth.d.ts
+
+# tests
+/components/**/**/__tests__/**/*.test.tsx
