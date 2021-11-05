@@ -15,4 +15,14 @@ interface IUserAuthTokenHelper {
   userToken: string;
 }
 
-export type { IuserLoginHelper, IuserSignupHelper, IUserAuthTokenHelper };
+interface IuserPasswordChangeHelper {
+  currentPassword: string;
+  newPassword: string;
+}
+
+export type {
+  IuserLoginHelper,
+  IuserSignupHelper,
+  IUserAuthTokenHelper,
+  IuserPasswordChangeHelper,
+};

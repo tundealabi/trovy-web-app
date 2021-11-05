@@ -19,6 +19,11 @@ const DashboardAccountDetailsHeaderText = styled(Typography)`
   text-transform: uppercase;
 `;
 const DashboardAccountDetailsHeaderActionButton = styled(IconButton)`
+  :disabled {
+    > .MuiSvgIcon-root {
+      color: grey;
+    }
+  }
   > .MuiSvgIcon-root {
     color: #2dd882;
   }

@@ -52,6 +52,10 @@ const LoginForm = () => {
             values
           );
           if (userLoginResponse) {
+            //       signIn('credentials', {
+            //   email: userLoginResponse.email,
+            //   callbackUrl: `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/dashboard`,
+            // });
             setUserInfo({ userId: userLoginResponse.userId, userEmail: userLoginResponse.email });
             setSendingAuthToken(true);
           }
@@ -63,85 +67,88 @@ const LoginForm = () => {
       }}
     >
       {({ handleSubmit, handleChange, handleBlur, values, touched, errors }) => (
-        <form noValidate onSubmit={handleSubmit}>
-          <TextField
-            type='email'
-            id='user-email'
-            label='Email'
-            variant='filled'
-            name='email'
-            value={values.email}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={!!(touched.email && errors.email)}
-            helperText={touched.email && errors.email}
-            fullWidth
-            margin='normal'
-            disabled={sendingAuthToken}
-          />
-          <Box mt={1.5} mb={1.5} />
-          <TextField
-            type={showPassword ? 'text' : 'password'}
-            id='user-password'
-            label='Password'
-            variant='filled'
-            name='password'
-            value={values.password}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={!!(touched.password && errors.password)}
-            helperText={touched.password && errors.password}
-            fullWidth
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position='end'>
-                  <IconButton
-                    aria-label='toggle password visibility'
-                    onClick={handleShowPassword}
-                    onMouseDown={handleShowPassword}
-                    edge='end'
-                  >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-            disabled={sendingAuthToken}
-          />
-          {sendingAuthToken ? (
-            <>
-              <Box mt={1.5} mb={1.5} />
-              <TextField
-                type='text'
-                id='user-token'
-                label='Token'
-                variant='filled'
-                value={authToken}
-                onChange={(ev) => setAuthToken(ev.target.value)}
-                error={!!(touched.email && errors.email)}
-                helperText={tokenFieldHelperText}
-                fullWidth
-                margin='normal'
-              />
-            </>
+        <>
+          <form noValidate onSubmit={handleSubmit}>
+            <TextField
+              type='email'
+              id='user-email'
+              label='Email'
+              variant='filled'
+              name='email'
+              value={values.email}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={!!(touched.email && errors.email)}
+              helperText={touched.email && errors.email}
+              fullWidth
+              margin='normal'
+              disabled={sendingAuthToken}
+            />
+            <Box mt={1.5} mb={1.5} />
+            <TextField
+              type={showPassword ? 'text' : 'password'}
+              id='user-password'
+              label='Password'
+              variant='filled'
+              name='password'
+              value={values.password}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={!!(touched.password && errors.password)}
+              helperText={touched.password && errors.password}
+              fullWidth
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position='end'>
+                    <IconButton
+                      aria-label='toggle password visibility'
+                      onClick={handleShowPassword}
+                      onMouseDown={handleShowPassword}
+                      edge='end'
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+              disabled={sendingAuthToken}
+            />
+            {sendingAuthToken ? (
+              <>
+                <Box mt={1.5} mb={1.5} />
+                <TextField
+                  type='text'
+                  id='user-token'
+                  label='Token'
+                  variant='filled'
+                  value={authToken}
+                  onChange={(ev) => setAuthToken(ev.target.value)}
+                  error={!!(touched.email && errors.email)}
+                  helperText={tokenFieldHelperText}
+                  fullWidth
+                  margin='normal'
+                />
+              </>
+            ) : null}
+            <LoginSignupAuthButtonContainer>
+              {authToken.trim().length !== 6 ? (
+                <LoginSignupAuthButton disabled={disableBtn} type='submit' fullWidth>
+                  {sendingAuthToken ? 'resend token' : 'login'}
+                </LoginSignupAuthButton>
+              ) : null}
+            </LoginSignupAuthButtonContainer>
+          </form>
+          {authToken.trim().length === 6 ? (
+            <LoginSignupAuthButton
+              disabled={disableBtn}
+              type='button'
+              fullWidth
+              onClick={handleVerifyUserToken}
+            >
+              verify
+            </LoginSignupAuthButton>
           ) : null}
-          <LoginSignupAuthButtonContainer>
-            {authToken.trim().length === 6 ? (
-              <LoginSignupAuthButton
-                disabled={disableBtn}
-                type='button'
-                fullWidth
-                onClick={handleVerifyUserToken}
-              >
-                verify
-              </LoginSignupAuthButton>
-            ) : (
-              <LoginSignupAuthButton disabled={disableBtn} type='submit' fullWidth>
-                {sendingAuthToken ? 'resend token' : 'login'}
-              </LoginSignupAuthButton>
-            )}
-          </LoginSignupAuthButtonContainer>
-        </form>
+        </>
       )}
     </Formik>
   );

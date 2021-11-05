@@ -1,4 +1,7 @@
 import EditIcon from '@mui/icons-material/Edit';
+import { useSession } from 'next-auth/react';
+import { showAuthDialog } from '../../redux/auth_dialog/auth-dialog.slice';
+import { useAppDispatch } from '../../redux/hooks';
 import {
   DashboardAccountChangePasswordButton,
   DashboardAccountContainer,
@@ -10,35 +13,42 @@ import {
 } from './DashboardAccount.styled';
 
 const DashboardAccount = () => {
-  const elevationValue = 0;
+  const dispatch = useAppDispatch();
+  const { data: session } = useSession();
   return (
-    <DashboardAccountContainer>
-      <DashboardAccountDetailsContainer elevation={elevationValue}>
-        <DashboardAccountDetailsHeader>
-          <DashboardAccountDetailsHeaderText>account details</DashboardAccountDetailsHeaderText>
-          <DashboardAccountDetailsHeaderActionButton>
-            <EditIcon />
-          </DashboardAccountDetailsHeaderActionButton>
-        </DashboardAccountDetailsHeader>
-        <DashboardAccountDetailsBodyText>
-          First Name:
-          <span>alabi</span>
-        </DashboardAccountDetailsBodyText>
-        <DashboardAccountDetailsBodyText>
-          Last Name:
-          <span>tunde</span>
-        </DashboardAccountDetailsBodyText>
-        <DashboardAccountDetailsBodyText>
-          Email:
-          <span>tundealabi4780@gmail.com</span>
-        </DashboardAccountDetailsBodyText>
-        <DashboardAccountDetailsBodyText>
-          Phone Number:
-          <span>+2348167229045</span>
-        </DashboardAccountDetailsBodyText>
-        <DashboardAccountChangePasswordButton>change password</DashboardAccountChangePasswordButton>
-      </DashboardAccountDetailsContainer>
-    </DashboardAccountContainer>
+    session && (
+      <DashboardAccountContainer>
+        <DashboardAccountDetailsContainer elevation={0}>
+          <DashboardAccountDetailsHeader>
+            <DashboardAccountDetailsHeaderText>account details</DashboardAccountDetailsHeaderText>
+            <DashboardAccountDetailsHeaderActionButton disabled>
+              <EditIcon />
+            </DashboardAccountDetailsHeaderActionButton>
+          </DashboardAccountDetailsHeader>
+          <DashboardAccountDetailsBodyText>
+            First Name:
+            <span style={{ textTransform: 'capitalize' }}>{session.user.firstName}</span>
+          </DashboardAccountDetailsBodyText>
+          <DashboardAccountDetailsBodyText>
+            Last Name:
+            <span style={{ textTransform: 'capitalize' }}>{session.user.lastName}</span>
+          </DashboardAccountDetailsBodyText>
+          <DashboardAccountDetailsBodyText>
+            Email:
+            <span>{session.user.email}</span>
+          </DashboardAccountDetailsBodyText>
+          <DashboardAccountDetailsBodyText>
+            Phone Number:
+            <span>{session.user.phoneNumber}</span>
+          </DashboardAccountDetailsBodyText>
+          <DashboardAccountChangePasswordButton
+            onClick={() => dispatch(showAuthDialog('password-change'))}
+          >
+            change password
+          </DashboardAccountChangePasswordButton>
+        </DashboardAccountDetailsContainer>
+      </DashboardAccountContainer>
+    )
   );
 };
 

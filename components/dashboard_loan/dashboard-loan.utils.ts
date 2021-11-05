@@ -1,5 +1,5 @@
 import currencyFormatter from 'currency-formatter';
-import ILoanModel from '../../db/models/loan/loan-model.interface';
+import { ILoanModel, ILoanScheduleModel } from '../../db/models/loan/loan-model.interface';
 
 const calculateTotalLoan = (loans: Array<ILoanModel>) => {
   if (!loans) {
@@ -12,4 +12,17 @@ const calculateTotalLoan = (loans: Array<ILoanModel>) => {
   return currencyFormatter.format(totalAmount, { symbol: '$' });
 };
 
-export default calculateTotalLoan;
+const calculateLoanBalance = (loanSchedules: Array<ILoanScheduleModel>) => {
+  if (!loanSchedules) {
+    return currencyFormatter.format(0, { symbol: '$' });
+  }
+  const balance = loanSchedules.reduce((prevV, currV) => {
+    if (currV.status === 'active') {
+      prevV += Number(currV.proratedPayment);
+    }
+    return prevV;
+  }, 0);
+  return currencyFormatter.format(balance, { symbol: '$' });
+};
+
+export { calculateTotalLoan, calculateLoanBalance };

@@ -1,3 +1,9 @@
+interface ILoanScheduleModel {
+  _id: string;
+  month: string;
+  proratedPayment: string;
+  status: string;
+}
 interface ILoanModel {
   _id: string;
   userId: string;
@@ -6,12 +12,7 @@ interface ILoanModel {
   loanSpreadDuration: string;
   loanDate: string;
   loanStatus: 'active' | 'completed' | 'due';
-  loanSchedule: Array<{
-    _id: string;
-    month: string;
-    proratedPayment: string;
-    status: string;
-  }>;
+  loanSchedule: Array<ILoanScheduleModel>;
 }
 
-export default ILoanModel;
+export type { ILoanModel, ILoanScheduleModel };

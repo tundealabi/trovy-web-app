@@ -1,4 +1,4 @@
-import ILoanModel from '../../../db/models/loan/loan-model.interface';
+import { ILoanModel } from '../../../db/models/loan/loan-model.interface';
 
 interface ILoanApplyHelper {
   loanAmount: string;

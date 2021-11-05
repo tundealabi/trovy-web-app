@@ -1,11 +1,11 @@
 import { useQuery } from 'react-query';
 import Skeleton from '@mui/material/Skeleton';
-import ILoanModel from '../../db/models/loan/loan-model.interface';
+import { ILoanModel } from '../../db/models/loan/loan-model.interface';
 import { showGlobalModal } from '../../redux/global_modal/global-modal.slice';
 import { useAppDispatch } from '../../redux/hooks';
 import { getLoansFromApi } from '../../utils/api_helpers/api_loan/api-loan.helper';
 import LoanInterface from './components/loan_interface/LoanInterface';
-import calculateTotalLoan from './dashboard-loan.utils';
+import { calculateTotalLoan } from './dashboard-loan.utils';
 import {
   DashboardCreateLoanButton,
   DashboardLoanContainer,

@@ -1,5 +1,10 @@
 import axios from 'axios';
-import { IUserAuthTokenHelper, IuserLoginHelper, IuserSignupHelper } from './api-user.interface';
+import {
+  IUserAuthTokenHelper,
+  IuserLoginHelper,
+  IuserPasswordChangeHelper,
+  IuserSignupHelper,
+} from './api-user.interface';
 
 const userLoginHelper = async ({ email, password }: IuserLoginHelper) => {
   const response = await axios({
@@ -59,4 +64,22 @@ const userSessionHelper = async (userEmail: string) => {
   return response.data;
 };
 
-export { userLoginHelper, userVerifyAuthTokenHelper, userSignupHelper, userSessionHelper };
+const userPasswordChangeHelper = async (passwordData: IuserPasswordChangeHelper) => {
+  const response = await axios({
+    method: 'post',
+    url: `/api/user/password-change`,
+    data: {
+      ...passwordData,
+    },
+  });
+  // console.log('resp-login', response);
+  return response.data;
+};
+
+export {
+  userLoginHelper,
+  userVerifyAuthTokenHelper,
+  userSignupHelper,
+  userSessionHelper,
+  userPasswordChangeHelper,
+};
