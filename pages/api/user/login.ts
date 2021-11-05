@@ -36,7 +36,7 @@ loginHandler.post(async (req, res) => {
         { new: true, upsert: true }
       );
       const generatedUserToken = await generateToken(userAuthToken?.userTokenSecret as string);
-      sendTwoFactorAuthCodeMail({
+      await sendTwoFactorAuthCodeMail({
         recipientMail: user.email,
         recipientName: user.lastName,
         token: generatedUserToken,
