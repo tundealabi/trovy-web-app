@@ -17,7 +17,7 @@ Check out the project documentation [here](https://docs.google.com/document/d/1m
 
 ### Running Locally
 
-- Clone the repository. Run the following  in your terminal
+- Clone the repository. Run the following in your terminal
 
 ```bash
 git clone https://github.com/tundealabi/trovy-web-app.git
@@ -32,6 +32,7 @@ yarn install
   - Client keys and secret for authentication (next-auth)
   - Client key for paystack
 - To run locally after setting the environment variables correctly.
+
   - To run in development mode
 
   ```bash
